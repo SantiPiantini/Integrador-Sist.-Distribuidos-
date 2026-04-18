@@ -8,7 +8,7 @@ router = APIRouter(prefix="/cliente", tags=["cliente"])
 def alta_cliente(cliente: schemas.ClienteCreate):
     try:
         return services.crear(cliente)
-    except:
+    except ValueError as e:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e))
 
 @router.get("/", response_model=List[schemas.ClienteRead], status_code=status.HTTP_200_OK)
